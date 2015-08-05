@@ -1,0 +1,65 @@
+web:
+    image: nginx-dev
+    links:
+        - php
+    ports:
+        - 80:80
+    volumes:
+        - ../../thejujuchan/app:/var/www/html
+    environment:
+        PHP_FPM: php:9000
+        DOCUMENT_ROOT: /var/www/html/bedrock/web
+php:
+    image: php-dev
+    volumes:
+        - ../../thejujuchan/app:/var/www/html
+    links:
+        - database
+database:
+    image: mysql-dev
+    environment:
+        MYSQL_ROOT_PASSWORD: root
+        MYSQL_USER: wordpress
+        MYSQL_PASSWORD: wordpress
+        MYSQL_DATABASE: thejujuchan
+    ports:
+        - 3306:3306
+# web:
+#     image: web-dev
+#     # links:
+#     #     - db
+#     ports:
+#         - 80:80
+#     volumes:
+#         - ../../thejujuchan:/var/www/html
+# db:
+#     image: mysql-dev
+#     environment:
+#         MYSQL_ROOT_PASSWORD: root
+#         MYSQL_USER: thejujuchan
+#         MYSQL_PASSWORD: thejujuchan
+#         MYSQL_DATABASE: thejujuchan
+#     ports:
+#         - 3306:3306
+#php:
+#    image: php-dev
+
+# jjweb:
+#     image: php:5.6-apache
+#     links:
+#         - jjdb
+#     ports:
+#         - 80:80
+#     volumes:
+#         - ../../thejujuchan:/var/www/html
+#         - ./httpd/sites-available/thejujuchan.dev.conf:/usr/local/apache2/conf/httpd.conf
+# jjdb:
+#     image: mysql:5.6
+#     environment:
+#         MYSQL_ROOT_PASSWORD: root
+#         MYSQL_USER: thejujuchan
+#         MYSQL_PASSWORD: thejujuchan
+#         MYSQL_DATABASE: thejujuchan
+#     ports:
+#         - 3306:3306
+#     privileged: true

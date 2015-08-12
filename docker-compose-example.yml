@@ -1,0 +1,27 @@
+web:
+    image: nginx-dev
+    links:
+        - php
+    ports:
+        - 80:80
+    volumes:
+        - ../../project/app:/var/www/html
+    environment:
+        PHP_FPM: php:9000
+        DOCUMENT_ROOT: /var/www/html
+        SERVER_NAME: app.dev
+php:
+    image: php-dev
+    volumes:
+        - ../../project/app:/var/www/html
+    links:
+        - database
+database:
+    image: mysql-dev
+    environment:
+        MYSQL_ROOT_PASSWORD: root
+        MYSQL_USER: wordpress
+        MYSQL_PASSWORD: wordpress
+        MYSQL_DATABASE: wordpress
+    ports:
+        - 3306:3306

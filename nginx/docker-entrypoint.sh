@@ -6,5 +6,6 @@ sed  -i -e "s|sendfile\s\+on|sendfile off|" /etc/nginx/nginx.conf
 
 sed -i -e "s|%DOCUMENT_ROOT%|${DOCUMENT_ROOT:-/var/www/html}|" /etc/nginx/conf.d/default.conf
 sed -i -e "s|%PHP_FPM%|${PHP_FPM:-php:9000}|" /etc/nginx/conf.d/default.conf
+sed -i -e "s|%SERVER_NAME%|${SERVER_NAME:-app.dev}|" /etc/nginx/conf.d/default.conf
 
 exec "$@"

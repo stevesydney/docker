@@ -30,12 +30,12 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         php5-xdebug \ 
     && rm -rf /var/lib/apt/lists/* \
     && apt-get clean \
-    && sed -i -e "s/^listen = .*/listen = 0.0.0.0:7777/" /etc/php5/fpm/pool.d/www.conf \
+    && sed -i -e "s/^listen = .*/listen = 0.0.0.0:9000/" /etc/php5/fpm/pool.d/www.conf \
     && sed -i -e "s/^;daemonize = yes/daemonize = no/" /etc/php5/fpm/php-fpm.conf \
     && sed -i -e "s/^error_log = .*/error_log = stderr/" /etc/php5/fpm/php-fpm.conf \
     && sed -i -e "s/^display_errors = Off/display_errors = stderr/" /etc/php5/fpm/php.ini
 
 COPY xdebug.ini /etc/php5/fpm/conf.d/20-xdebug.ini
 
-EXPOSE 7777
+EXPOSE 9000
 CMD ["php5-fpm"]

@@ -7,7 +7,7 @@ web:
     volumes:
         - ../../project/app:/var/www/html
     environment:
-        PHP_FPM: php:7777
+        PHP_FPM: php:9000
         DOCUMENT_ROOT: /var/www/html
         SERVER_NAME: app.dev
 php:

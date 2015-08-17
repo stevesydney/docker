@@ -2,20 +2,26 @@ web:
     image: nginx-dev
     links:
         - php
+        - storage
     ports:
         - 80:80
-    volumes:
-        - ../../project/app:/var/www/html
+    volumes_from:
+        - storage
     environment:
         PHP_FPM: php:9000
         DOCUMENT_ROOT: /var/www/html
-        SERVER_NAME: app.dev
+        SERVER_NAME: app.dev        
 php:
     image: php-dev
-    volumes:
-        - ../../project/app:/var/www/html
+    volumes_from:
+        - storage
     links:
         - database
+        - storage
+storage:
+    image: storage-dev
+    volumes:
+        - ../../project/app:/var/www/html
 database:
     image: mysql-dev
     environment:

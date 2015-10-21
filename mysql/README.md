@@ -2,4 +2,4 @@
 
 This container is currently just a standard MySQL docker image.
 
-Currently it is not modified.
+- Custom.conf with basic skip-host-cache & skip-name-resolve directives

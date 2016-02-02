@@ -3,7 +3,9 @@ FROM debian:jessie
 MAINTAINER Steve Farrugia "sfarrugia@gmail.com"
 
 # Install PHP 
-RUN apt-add-repository ppa:phalcon/stable && apt-get update && apt-get install -y --no-install-recommends \ 
+RUN sed -i -e "deb http://debrepo.frbit.com/ frbit-squeeze main" /etc/apt/sources.list.d/frbit.list \
+        && wget -O - http://debrepo.frbit.com/frbit.gpg | sudo apt-key add - \
+        && apt-get update && apt-get install -y --no-install-recommends \ 
         php5-fpm \
         php5-geoip \
         php5-gnupg \
